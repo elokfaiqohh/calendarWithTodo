@@ -486,10 +486,28 @@ function saveEvents(){
   localStorage.setItem("events", JSON.stringify(eventsArr));
 }
 
-function getEvents(){
-  if (localStorage.getItem("events" === null)){
+// function getEvents(){
+//   if (localStorage.getItem("events" === null)){
+//     return;
+//   }
+  
+//   eventsArr.push(...JSON.parse(localStorage.getItem("events")));
+// }
+
+function getEvents() {
+  const storedEvents = localStorage.getItem("events");
+  if (storedEvents === null) {
     return;
   }
-  
-  eventsArr.push(...JSON.parse(localStorage.getItem("events")));
+
+  try {
+    const parsedEvents = JSON.parse(storedEvents);
+    if (Array.isArray(parsedEvents)) {
+      eventsArr.push(...parsedEvents);
+    } else {
+      console.error("Invalid data in localStorage: Not an array.");
+    }
+  } catch (error) {
+    console.error("Error parsing JSON from localStorage:", error);
+  }
 }
