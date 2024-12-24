@@ -51,6 +51,7 @@ class Calendar {
     this.bindEvents();
     this.getEvents();
     this.initCalendar();
+    this.checkAlarm(); // Memanggil fungsi untuk memeriksa alarm
   }
 
   cacheDOM() {
@@ -243,12 +244,12 @@ class Calendar {
       e.target.value += ":";
     }
     if (e.target.value.length > 5) {
-      e.target.value = e.target.value.slice(0, 5);
+      e.target.value = e .target.value.slice(0, 5);
     }
   }
 
   handleOutsideClick(e) {
-    if (e.target !== this.addEventBtn && !this.addEventContainer.contains(e.target )) {
+    if (e.target !== this.addEventBtn && !this.addEventContainer.contains(e.target)) {
       this.closeAddEvent();
     }
   }
@@ -274,6 +275,7 @@ class Calendar {
     const newEvent = {
       title: eventTitle,
       time: `${this.convertTime(eventTimeFrom)} - ${this.convertTime(eventTimeTo)}`,
+      alarmTime: eventTimeFrom // Menyimpan waktu alarm
     };
 
     let eventAdded = false;
@@ -333,15 +335,15 @@ class Calendar {
     let events = "";
     this.eventsArr.forEach(event => {
       if (date === event.day && this.month + 1 === event.month && this.year === event.year) {
-        event.events.forEach(event => {
+        event.events.forEach(ev => {
           events += `
             <div class="event">
               <div class="title">
                 <i class="fas fa-circle"></i>
-                <h3 class="event-title">${event.title}</h3>
+                <h3 class="event-title">${ev.title}</h3>
               </div>
               <div class="event-time">
-                <span class="event-time">${event.time}</span>
+                <span class="event-time">${ev.time}</span>
               </div>
             </div>`;
         });
@@ -394,7 +396,7 @@ class Calendar {
     try {
       const parsedEvents = JSON.parse(storedEvents);
       if (Array.isArray(parsedEvents)) {
-        this.eventsArr.push (...parsedEvents);
+        this.eventsArr.push(...parsedEvents);
       } else {
         console.error("Invalid data in localStorage: Not an array.");
       }
@@ -408,6 +410,23 @@ class Calendar {
     const dayName = day.toString().split(" ")[0];
     this.eventDay.innerHTML = dayName;
     this.eventDate.innerHTML = `${date} ${this.months[this.month]} ${this.year}`;
+  }
+
+  checkAlarm() {
+    setInterval(() => {
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+
+      this.eventsArr.forEach(event => {
+        event.events.forEach(ev => {
+          const [eventHour, eventMinute] = ev.alarmTime.split(":").map(Number);
+          if (currentHour === eventHour && currentMinute === eventMinute) {
+            this.notifier.createNotification(`Alarm: ${ev.title} is starting now!`, 5000);
+          }
+        });
+      });
+    }, 60000); // Memeriksa setiap menit
   }
 }
 
