@@ -576,6 +576,10 @@ body{
         height: 50px;
     }
 
+    .calendar .days{
+        gap: 0;
+    }
+
     .calendar .days .day{
         height: 40px;
         font-size: 0.8rem;
