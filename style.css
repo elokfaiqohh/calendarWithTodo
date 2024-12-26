@@ -1,5 +1,5 @@
 :root{
-    --primary-clr : #b38add
+    --primary-clr : #00ADB5
 }
 
 *{
@@ -26,13 +26,13 @@ body{
     color: #fff;
     display: flex;
     border-radius: 10px;
-    background-color: #373c4f;
+    background-color: #62656A;
 }
 
 /* ============================== THIS IS LEFT STYLE =============================== */
 .left{
     width: 65%;
-    padding: 20px;
+    padding: 30px 40px;
 }
 
 .calendar{
@@ -43,9 +43,9 @@ body{
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    color: #878895;
-    border-radius: 5px;
-    background-color: #ffffff;
+    color: #fff;
+    border-radius: 15px;
+    background-color: #393E46;
 }
 
 .calendar::before, 
@@ -69,13 +69,13 @@ body{
 
 .calendar .month{
     width: 100%;
-    height: 150px;
+    height: 130px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 50px;
     font-size: 1.2 rem;
-    font-weight: 500;
+    font-weight: 700;
     text-transform: capitalize;
 }
 
@@ -118,6 +118,7 @@ body{
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 20px;
+    gap: 1.5px;
 }
 
 .calendar .days .day{
@@ -127,8 +128,8 @@ body{
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--primary-clr);
-    border: 1px solid #f5f5f5;
+    color: #fff;
+    border: 1px solid #62656A;
 }
 
 .calendar .day:not(.prev-date, .next-date):hover{
@@ -219,10 +220,15 @@ body{
     border-radius: 5px;
     padding: 0 20px;
     color: var(--primary-clr);   
+    background-color: transparent;
+}
+
+.calendar .goto-today .goto input::placeholder{
+    color: #a5a5a5;
 }
 
 .calendar .goto-today button{
-    padding: 5px 10px;
+    padding: 10px 20px;
     border: 1px solid var(--primary-clr);
     border-radius: 5px;
     background-color: transparent;
@@ -249,6 +255,8 @@ body{
     width: 35%;
     min-height: 100%;
     padding: 20px 0;
+    border-radius: 0 15px 15px 0;
+    background: #eee;
 }
 
 .right .today-date{
@@ -268,13 +276,14 @@ body{
 
 .today-date .event-day{
     font-size: 2rem;
-    font-weight: 500;
+    font-weight: 600;
+    color: #393E46;
 }
 
 .today-date .event-date{
     font-size: 1rem;
     font-weight: 400;
-    color: #fff;
+    color: #393E46;
 }
 
 .events {
@@ -285,12 +294,12 @@ body{
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 0;
 }
 
 .events .event{
     position: relative;
-    width: 95%;
+    width: 100%;
     min-height: 70px;
     display: flex;
     justify-content: center;
@@ -300,7 +309,7 @@ body{
     padding-left: 50px;
     color: #fff;
     cursor: pointer;
-    background: linear-gradient(90deg, #3f4458, transparent);
+    background: linear-gradient(90deg, #3f4458, #3f4458d1, transparent);
 }
 
 .events .event:nth-child(even){
@@ -345,13 +354,13 @@ body{
     content: '✓';
     position: absolute;
     top: 50%;
-    right: 0;
-    font-size: 3rem;
+    right: 50px;
+    font-size: 2.7rem;
     display: none;
     align-items: center;
     justify-content: center;
     opacity: 0.3;
-    color: var(--primary-clr);
+    color: #393e46;
     transform: translateY(-50%);
 }
 
@@ -377,14 +386,17 @@ body{
     width: 90%;
     max-height: 0;
     overflow: hidden;
-    border-radius: 5px;
-    background-color: #fff;
+    border-radius: 15px;
+    background-color: #eee;
+    opacity: 0.9;
     transform: translateX(-50%);
     transition: max-height 0.5s;
+    padding: 10px;
 }
 
 .add-event-wrapper.active{
-    max-height: 300px;
+    max-height: 320px;
+    background-color: #393E46;
 }
 
 .add-event-header{
@@ -394,8 +406,8 @@ body{
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    color: #373c4f;
-    border-bottom: 1px solid #f5f5f5;
+    color: #fff;
+    border-bottom: 1px solid #f5f5f5;   
 }
 
 .add-event-header .close{
@@ -409,7 +421,7 @@ body{
 
 .add-event-header .title{
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .add-event-body{
@@ -439,7 +451,8 @@ body{
     padding: 0 10px;
     font-size: 1rem;
     font-weight: 400;
-    color: #373c4f;
+    color: #fff;
+    background: transparent;
 }
 
 .add-event-body .add-event-input input::placeholder{
@@ -467,8 +480,8 @@ body{
     font-weight: 500;
     outline: none;
     border: none;
-    color: #fff;
-    background-color: var(--primary-clr);
+    color: var(--primary-clr);
+    background-color: transparent;
     border-radius: 5px;
     cursor: pointer;
     padding: 5px 10px;
@@ -476,25 +489,25 @@ body{
 }
 
 .add-event-btn:hover{
-    color: var(--primary-clr);
-    background-color: transparent;
+    color: #fff;
+    background-color: var(--primary-clr);
 }
 
 .add-event {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    color: #878895;
+    color: var(--primary-clr); 
+    opacity: 0.9;
     border: 2px solid #878895;
-    opacity: 0.5;
-    border-radius: 50%;
-    background-color: transparent;
+    border-radius: 20%;
+    background-color: #393E46;
     cursor: pointer;
 }
 
