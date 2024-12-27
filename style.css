@@ -387,7 +387,7 @@ body{
     max-height: 0;
     overflow: hidden;
     border-radius: 15px;
-    background-color: #eee;
+    background-color: transparent;
     opacity: 0.9;
     transform: translateX(-50%);
     transition: max-height 0.5s;
