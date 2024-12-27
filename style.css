@@ -568,6 +568,10 @@ body{
 }
 
 @media (max-width: 500px){
+    .container .right{
+        border-radius: 15px 15px 0 0;
+    }
+
     .calendar .month{
         height: 75px;
     }
@@ -592,5 +596,19 @@ body{
 
     .right .today-date{
         padding: 20px;
+    }
+
+    .events {
+        padding-bottom: 0;
+        max-height: 200px;
+    }
+
+    .events .no-event{
+        padding-top: 10%;
+    }
+
+    .add-event{
+        position: sticky;
+        left: 80%;
     }
 }
