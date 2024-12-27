@@ -599,7 +599,7 @@ body{
     }
 
     .events {
-        padding-bottom: 0;
+        padding-bottom: 100px;
         max-height: 200px;
     }
 
