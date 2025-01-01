@@ -309,7 +309,7 @@ body{
     padding-left: 50px;
     color: #fff;
     cursor: pointer;
-    background: linear-gradient(90deg, #3f4458, #3f4458d1, transparent);
+    background: linear-gradient(90deg, #3f4458, #3f4458eb, #3f4458a3, transparent);
 }
 
 .events .event:nth-child(even){

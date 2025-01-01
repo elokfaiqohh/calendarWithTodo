@@ -440,17 +440,19 @@ class Calendar {
       const now = new Date();
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
-
+      const currentSecond = now.getSeconds(); // Ambil detik saat ini
+  
       this.eventsArr.forEach(event => {
         event.events.forEach(ev => {
           const [eventHour, eventMinute] = ev.alarmTime.split(":").map(Number);
-          if (currentHour === eventHour && currentMinute === eventMinute) {
+          // Periksa apakah jam, menit, dan detik sama dengan 0
+          if (currentHour === eventHour && currentMinute === eventMinute && currentSecond === 0) {
             this.notifier.createNotification(`Alarm: ${ev.title} is starting now!`, 5000);
             this.notifier.notificationSound.play(); // Memainkan suara alarm di sini
           }
         });
       });
-    }, 60000); // Memeriksa setiap menit
+    }, 1000); // Memeriksa setiap detik
   }
 }
 
