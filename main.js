@@ -16,9 +16,6 @@ class Notification {
     // Append the notification to the container
     this.notificationsContainer.appendChild(notification);
 
-    // Play the notification sound
-    this.notificationSound.play();
-
     // Automatically dismiss the notification after the specified duration
     setTimeout(() => {
       this.dismissNotification(notification);
@@ -52,6 +49,9 @@ class Calendar {
     this.getEvents();
     this.initCalendar();
     this.checkAlarm(); // Memanggil fungsi untuk memeriksa alarm
+
+    // Bind keydown event for Enter key
+    document.addEventListener('keydown', (e) => this.handleKeyDown(e));
   }
 
   cacheDOM() {
@@ -90,7 +90,22 @@ class Calendar {
     this.addEventTo.addEventListener("input", (e) => this.formatTimeInput(e));
     this.eventsContainer.addEventListener("click", (e) => this.deleteEvent(e));
   }
-
+  
+  handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      // Cek konteks dan panggil fungsi yang sesuai
+      if (document.activeElement === this.addEventTitle) {
+        this.addEvent();
+      } else if (document.activeElement === this.dateInput) {
+        this.gotoDate();
+      } else if (document.activeElement === this.addEventFrom || document.activeElement === this.addEventTo) {
+        this.addEventSubmit.click(); // Simulate click on add event button
+      } else if (document.activeElement === this.addEventCloseBtn) {
+        this.closeAddEvent();
+      }
+    }
+  }
+  
   initCalendar() {
     const firstDay = new Date(this.year, this.month, 1);
     const lastDay = new Date(this.year, this.month + 1, 0);
@@ -104,6 +119,7 @@ class Calendar {
     this.renderDays(day, prevDays, lastDate, nextDays);
     this.addListeners();
   }
+
 
   renderDays(day, prevDays, lastDate, nextDays) {
     let days = "";
@@ -239,12 +255,19 @@ class Calendar {
   }
 
   formatTimeInput(e) {
-    e.target.value = e.target.value.replace(/[^0-9:]/g, "");
-    if (e.target.value.length === 2) {
-      e.target.value += ":";
+    const input = e.target;
+    const value = input.value.replace(/[^0-9:]/g, ""); // Hanya izinkan angka dan titik dua
+
+    // Jika input tidak valid, izinkan backspace
+    if (value.length > 5) {
+      input.value = value.slice(0, 5); // Batasi panjang input
+    } else {
+      input.value = value; // Setel nilai input
     }
-    if (e.target.value.length > 5) {
-      e.target.value = e .target.value.slice(0, 5);
+
+    // Tambahkan titik dua setelah dua karakter
+    if (value.length === 2 && !value.includes(":")) {
+      input.value += ":";
     }
   }
 
@@ -423,6 +446,7 @@ class Calendar {
           const [eventHour, eventMinute] = ev.alarmTime.split(":").map(Number);
           if (currentHour === eventHour && currentMinute === eventMinute) {
             this.notifier.createNotification(`Alarm: ${ev.title} is starting now!`, 5000);
+            this.notifier.notificationSound.play(); // Memainkan suara alarm di sini
           }
         });
       });
@@ -443,7 +467,7 @@ style.innerHTML = `
     z-index: 1000;
   }
   .notification {
-    background-color: #4caf50; /* Green */
+    background-color: var(--primary-clr); 
     color: white;
     padding: 15px;
     margin: 10px 0;
