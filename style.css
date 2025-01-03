@@ -19,20 +19,20 @@ body{
 
 .container {
     position: relative;
-    width: 1300px;
+    width: 100%;
     min-height: 850px;
     margin: 0 auto;
-    padding: 5px;
+    padding: 0;
     color: #fff;
     display: flex;
-    border-radius: 10px;
+    border-radius: 0;
     background-color: #62656A;
 }
 
 /* ============================== THIS IS LEFT STYLE =============================== */
 .left{
     width: 65%;
-    padding: 30px 40px;
+    padding: 40px 90px;
 }
 
 .calendar{
@@ -255,7 +255,7 @@ body{
     width: 35%;
     min-height: 100%;
     padding: 20px 0;
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 7px 7px 0;
     background: #eee;
 }
 
@@ -520,7 +520,7 @@ body{
 }
 
 /* ========================================== Responsive ========================================= */
-@media (max-width: 1000px){
+@media (max-width: 1250px){
     body{
         align-items: flex-start;
         justify-content: flex-start;
@@ -536,7 +536,7 @@ body{
     .container .right{
         width: 100%;
         height: 100%;
-        padding: 20px 0;
+        padding: 20px 10px;
     }
 
     .calendar::before,
@@ -568,6 +568,7 @@ body{
 }
 
 @media (max-width: 500px){
+
     .container .right{
         border-radius: 15px 15px 0 0;
     }
